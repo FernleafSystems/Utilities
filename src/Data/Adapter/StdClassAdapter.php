@@ -1,10 +1,10 @@
 <?php
 
-namespace Fernleaf\Utilities\Data\Adapter;
+namespace FernleafSystems\Utilities\Data\Adapter;
 
 /**
  * Trait StdClassAdapter
- * @package Fernleaf\Utilities\Data\Adapter
+ * @package FernleafSystems\Utilities\Data\Adapter
  */
 trait StdClassAdapter {
 
