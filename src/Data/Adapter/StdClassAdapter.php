@@ -9,16 +9,17 @@ namespace FernleafSystems\Utilities\Data\Adapter;
 trait StdClassAdapter {
 
 	/**
-	 * @var \stdClass
+	 * @var array
 	 */
-	private $oRaw;
+	private $aRaw;
 
 	/**
 	 * @param string $sProperty
 	 * @return mixed
 	 */
 	public function __get( $sProperty ) {
-		return $this->getParam( $sProperty );
+		$aD = $this->getRawDataAsArray();
+		return isset( $aD[ $sProperty ] ) ? $aD[ $sProperty ] : null;
 	}
 
 	/**
@@ -26,8 +27,7 @@ trait StdClassAdapter {
 	 * @return bool
 	 */
 	public function __isset( $sProperty ) {
-		$oRaw = $this->getRawData();
-		return isset( $oRaw->{$sProperty} );
+		return array_key_exists( $sProperty, $this->getRawDataAsArray() );
 	}
 
 	/**
@@ -36,7 +36,9 @@ trait StdClassAdapter {
 	 * @return $this
 	 */
 	public function __set( $sProperty, $mValue ) {
-		return $this->setParam( $sProperty, $mValue );
+		$aA = $this->getRawDataAsArray();
+		$aA[ $sProperty ] = $mValue;
+		return $this->applyFromArray( $aA );
 	}
 
 	/**
@@ -48,10 +50,7 @@ trait StdClassAdapter {
 		if ( !empty( $aRestrictedKeys ) ) {
 			$aDataValues = array_intersect_key( $aDataValues, array_flip( $aRestrictedKeys ) );
 		}
-		$this->reset();
-		foreach ( $aDataValues as $sKey => $mValue ) {
-			$this->setParam( $sKey, $mValue );
-		}
+		$this->aRaw = $aDataValues;
 		return $this;
 	}
 
@@ -59,26 +58,25 @@ trait StdClassAdapter {
 	 * @return $this
 	 */
 	public function reset() {
-		$this->oRaw = new \stdClass();
+		$this->aRaw = array();
 		return $this;
 	}
 
 	/**
-	 * @param bool $bClone
 	 * @return \stdClass
 	 */
-	public function getRawData( $bClone = false ) {
-		if ( !is_object( $this->oRaw ) ) {
-			$this->oRaw = new \stdClass();
-		}
-		return $bClone ? clone $this->oRaw : $this->oRaw;
+	public function getRawData() {
+		return (object)$this->getRawDataAsArray();
 	}
 
 	/**
 	 * @return array
 	 */
 	public function getRawDataAsArray() {
-		return (array)$this->getRawData();
+		if ( !is_array( $this->aRaw ) ) {
+			$this->aRaw = array();
+		}
+		return $this->aRaw;
 	}
 
 	/**
@@ -87,17 +85,16 @@ trait StdClassAdapter {
 	 * @return bool
 	 */
 	public function isParam( $sKey, $mComparison ) {
-		return ( $this->getParam( $sKey ) == $mComparison );
+		return ( $this->{$sKey} == $mComparison );
 	}
 
 	/**
 	 * @param string $sKey
-	 * @param array  $nDefault
+	 * @param array  $aDefault
 	 * @return array
 	 */
-	public function getArrayParam( $sKey, $nDefault = array() ) {
-		$aVal = $this->getParam( $sKey, $nDefault );
-		return ( !is_null( $aVal ) && is_array( $aVal ) ) ? $aVal : $nDefault;
+	public function getArrayParam( $sKey, $aDefault = array() ) {
+		return is_array( $this->{$sKey} ) ? $this->{$sKey} : $aDefault;
 	}
 
 	/**
@@ -106,8 +103,7 @@ trait StdClassAdapter {
 	 * @return int|float|null
 	 */
 	public function getNumericParam( $sKey, $nDefault = null ) {
-		$nVal = $this->getParam( $sKey, $nDefault );
-		return ( !is_null( $nVal ) && is_numeric( $nVal ) ) ? $nVal : $nDefault;
+		return is_numeric( $this->{$sKey} ) ? $this->{$sKey} : $nDefault;
 	}
 
 	/**
@@ -116,7 +112,8 @@ trait StdClassAdapter {
 	 * @return mixed
 	 */
 	public function getParam( $sKey, $mDefault = null ) {
-		return isset( $this->{$sKey} ) ? $this->getRawData()->{$sKey} : $mDefault;
+		$mVal = $this->__get( $sKey );
+		return is_null( $mVal ) ? $mDefault : $mVal;
 	}
 
 	/**
@@ -134,8 +131,7 @@ trait StdClassAdapter {
 	 * @return $this
 	 */
 	public function setRawData( $oRaw ) {
-		$this->oRaw = $oRaw;
-		return $this;
+		return $this->applyFromArray( (array)$oRaw );
 	}
 
 	/**
@@ -144,7 +140,7 @@ trait StdClassAdapter {
 	 * @return $this
 	 */
 	public function setParam( $sKey, $mValue ) {
-		$this->getRawData()->{$sKey} = $mValue;
+		$this->__set( $sKey, $mValue );
 		return $this;
 	}
 
