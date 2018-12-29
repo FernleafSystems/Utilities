@@ -2,20 +2,20 @@
   "name":        "fernleafsystems/utilities",
   "description": "Collection of simple utilities and traits",
   "authors":     [
-	{
-	  "name":     "Paul Goodchild",
-	  "email":    "paul@paulgoodchild.me",
-	  "homepage": "https://paulgoodchild.me"
-	}
+    {
+      "name":     "Paul Goodchild",
+      "email":    "paul@paulgoodchild.me",
+      "homepage": "https://paulgoodchild.me"
+    }
   ],
   "require":     {
-	"php": ">=5.4"
+    "php": ">=5.4"
   },
   "require-dev": {
   },
   "autoload":    {
-	"psr-4": {
-	  "FernleafSystems\\Utilities\\": "src"
-	}
+    "psr-4": {
+      "FernleafSystems\\Utilities\\": "src"
+    }
   }
 }

@@ -63,6 +63,7 @@ trait StdClassAdapter {
 	}
 
 	/**
+	 * @deprecated
 	 * @return \stdClass
 	 */
 	public function getRawData() {
@@ -127,6 +128,7 @@ trait StdClassAdapter {
 	}
 
 	/**
+	 * @deprecated use applyFromArray()
 	 * @param object $oRaw
 	 * @return $this
 	 */
@@ -140,8 +142,7 @@ trait StdClassAdapter {
 	 * @return $this
 	 */
 	public function setParam( $sKey, $mValue ) {
-		$this->__set( $sKey, $mValue );
-		return $this;
+		return $this->__set( $sKey, $mValue );
 	}
 
 	/**
