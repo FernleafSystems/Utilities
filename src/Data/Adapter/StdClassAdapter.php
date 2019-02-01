@@ -42,6 +42,19 @@ trait StdClassAdapter {
 	}
 
 	/**
+	 * @param string $sKey
+	 * @return $this
+	 */
+	public function __unset( $sKey ) {
+		$aD = $this->getRawDataAsArray();
+		if ( array_key_exists( $sKey, $aD ) ) {
+			unset( $aD[ $sKey ] );
+			$this->applyFromArray( $aD );
+		}
+		return $this;
+	}
+
+	/**
 	 * @param array $aDataValues associative with parameter keys and values
 	 * @param array $aRestrictedKeys
 	 * @return $this
