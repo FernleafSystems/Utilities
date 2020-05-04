@@ -8,7 +8,7 @@ namespace FernleafSystems\Utilities\Logic;
  */
 trait OneTimeExecute {
 
-	private $bExecuted = false;
+	private $bHasOneTimeExecuted = false;
 
 	/**
 	 * @return bool
@@ -19,7 +19,7 @@ trait OneTimeExecute {
 
 	public function execute() {
 		if ( !$this->isAlreadyExecuted() && $this->canRun() ) {
-			$this->bExecuted = true;
+			$this->bHasOneTimeExecuted = true;
 			$this->run();
 		}
 	}
@@ -28,7 +28,15 @@ trait OneTimeExecute {
 	 * @return bool
 	 */
 	protected function isAlreadyExecuted() {
-		return (bool)$this->bExecuted;
+		return (bool)$this->bHasOneTimeExecuted;
+	}
+
+	/**
+	 * @return $this
+	 */
+	public function resetExecution() {
+		$this->bHasOneTimeExecuted = false;
+		return $this;
 	}
 
 	protected function run() {
