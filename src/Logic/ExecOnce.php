@@ -2,9 +2,9 @@
 
 namespace FernleafSystems\Utilities\Logic;
 
-trait OneTimeExec {
+trait ExecOnce {
 
-	private bool $hasExecuted = false;
+	private $hasExecuted = false;
 
 	protected function canRun() :bool {
 		return true;
