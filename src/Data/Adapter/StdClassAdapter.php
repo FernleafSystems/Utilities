@@ -4,7 +4,8 @@ namespace FernleafSystems\Utilities\Data\Adapter;
 
 /**
  * Trait StdClassAdapter
- * @package FernleafSystems\Utilities\Data\Adapter
+ * @package    FernleafSystems\Utilities\Data\Adapter
+ * @deprecated 1.4
  */
 trait StdClassAdapter {
 
@@ -59,7 +60,7 @@ trait StdClassAdapter {
 	 * @param array $aRestrictedKeys
 	 * @return $this
 	 */
-	public function applyFromArray( $aDataValues, $aRestrictedKeys = array() ) {
+	public function applyFromArray( $aDataValues, $aRestrictedKeys = [] ) {
 		if ( !empty( $aRestrictedKeys ) ) {
 			$aDataValues = array_intersect_key( $aDataValues, array_flip( $aRestrictedKeys ) );
 		}
@@ -71,13 +72,13 @@ trait StdClassAdapter {
 	 * @return $this
 	 */
 	public function reset() {
-		$this->aRaw = array();
+		$this->aRaw = [];
 		return $this;
 	}
 
 	/**
-	 * @deprecated
 	 * @return \stdClass
+	 * @deprecated
 	 */
 	public function getRawData() {
 		return (object)$this->getRawDataAsArray();
@@ -88,7 +89,7 @@ trait StdClassAdapter {
 	 */
 	public function getRawDataAsArray() {
 		if ( !is_array( $this->aRaw ) ) {
-			$this->aRaw = array();
+			$this->aRaw = [];
 		}
 		return $this->aRaw;
 	}
@@ -107,7 +108,7 @@ trait StdClassAdapter {
 	 * @param array  $aDefault
 	 * @return array
 	 */
-	public function getArrayParam( $sKey, $aDefault = array() ) {
+	public function getArrayParam( $sKey, $aDefault = [] ) {
 		return is_array( $this->{$sKey} ) ? $this->{$sKey} : $aDefault;
 	}
 
@@ -141,9 +142,9 @@ trait StdClassAdapter {
 	}
 
 	/**
-	 * @deprecated use applyFromArray()
 	 * @param object $oRaw
 	 * @return $this
+	 * @deprecated use applyFromArray()
 	 */
 	public function setRawData( $oRaw ) {
 		return $this->applyFromArray( (array)$oRaw );
