@@ -8,7 +8,7 @@ namespace FernleafSystems\Utilities\Data\Adapter;
  */
 trait DynamicProperties {
 
-	private array $raw = [];
+	private $raw = [];
 
 	/**
 	 * @param string $key
