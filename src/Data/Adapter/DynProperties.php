@@ -25,23 +25,19 @@ trait DynProperties {
 	/**
 	 * @param string $key
 	 * @param mixed  $value
-	 * @return $this
 	 */
-	public function __set( string $key, $value ) :self {
+	public function __set( string $key, $value ) {
 		$this->raw[ $key ] = $value;
-		return $this;
 	}
 
 	/**
 	 * @param string $key
-	 * @return $this
 	 */
-	public function __unset( string $key ) :self {
+	public function __unset( string $key ) {
 		unset( $this->raw[ $key ] );
-		return $this;
 	}
 
-	public function applyFromArray( $data, array $restrictedKeys = [] ) :self {
+	public function applyFromArray( $data, array $restrictedKeys = [] ) {
 		if ( !empty( $restrictedKeys ) ) {
 			$data = array_intersect_key( $data, array_flip( $restrictedKeys ) );
 		}
@@ -49,9 +45,8 @@ trait DynProperties {
 		return $this;
 	}
 
-	public function reset() :self {
+	public function reset() {
 		$this->raw = [];
-		return $this;
 	}
 
 	public function getRawData() :array {
