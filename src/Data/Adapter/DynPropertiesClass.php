@@ -7,7 +7,7 @@ namespace FernleafSystems\Utilities\Data\Adapter;
  * Class DynamicPropertiesBase
  * @package FernleafSystems\Utilities\Data\Adapter
  */
-class DynamicPropertiesClass {
+class DynPropertiesClass {
 
-	use DynamicProperties;
+	use DynProperties;
 }
