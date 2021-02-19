@@ -5,7 +5,6 @@ namespace FernleafSystems\Utilities\Data\Adapter;
 /**
  * Trait DynProperties
  * @package FernleafSystems\Utilities\Data\Adapter
- * @deprecated 
  */
 trait DynProperties {
 
