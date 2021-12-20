@@ -2,10 +2,6 @@
 
 namespace FernleafSystems\Utilities\Data\Adapter;
 
-/**
- * Trait DynProperties
- * @package FernleafSystems\Utilities\Data\Adapter
- */
 trait DynProperties {
 
 	private $raw = [];
@@ -37,7 +33,7 @@ trait DynProperties {
 		unset( $this->raw[ $key ] );
 	}
 
-	public function applyFromArray( $data, array $restrictedKeys = [] ) {
+	public function applyFromArray( array $data, array $restrictedKeys = [] ) {
 		if ( !empty( $restrictedKeys ) ) {
 			$data = array_intersect_key( $data, array_flip( $restrictedKeys ) );
 		}

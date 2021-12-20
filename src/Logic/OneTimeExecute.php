@@ -2,10 +2,6 @@
 
 namespace FernleafSystems\Utilities\Logic;
 
-/**
- * Trait OneTimeExecute
- * @package FernleafSystems\Utilities\Logic
- */
 trait OneTimeExecute {
 
 	private $bHasOneTimeExecuted = false;

@@ -5,8 +5,6 @@ namespace FernleafSystems\Utilities\Data\Response;
 use FernleafSystems\Utilities\Data\Adapter\DynPropertiesClass;
 
 /**
- * Class StdResponse
- * @package FernleafSystems\Utilities\Data\Response
  * @property bool   $success
  * @property bool   $failed
  * @property mixed  $error_code
