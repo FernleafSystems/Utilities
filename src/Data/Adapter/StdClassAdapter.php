@@ -3,8 +3,6 @@
 namespace FernleafSystems\Utilities\Data\Adapter;
 
 /**
- * Trait StdClassAdapter
- * @package    FernleafSystems\Utilities\Data\Adapter
  * @deprecated 1.4
  */
 trait StdClassAdapter {

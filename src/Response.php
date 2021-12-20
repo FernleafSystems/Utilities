@@ -4,10 +4,6 @@ namespace FernleafSystems\Utilities;
 
 use FernleafSystems\Utilities\Data\Adapter\StdClassAdapter;
 
-/**
- * Class Response
- * @package FernleafSystems\Utilities
- */
 class Response {
 
 	use StdClassAdapter;
